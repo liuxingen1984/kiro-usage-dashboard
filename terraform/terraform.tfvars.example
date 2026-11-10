@@ -1,0 +1,32 @@
+# Copy to terraform.tfvars and fill in your values. terraform.tfvars is gitignored.
+
+# Region of your Kiro profile (where you manage Kiro in the AWS console)
+aws_region = "us-east-1"
+
+# Account where your users are subscribed to Kiro
+aws_account_id = "111122223333"
+
+# Bucket and prefix where Kiro delivers the user activity reports (no s3://).
+# Must match the S3 location in Kiro console > Settings > Kiro user activity reports.
+s3_bucket_name = "amzn-s3-demo-bucket/user-activity"
+
+# IAM Identity Center identity store ID (aws sso-admin list-instances).
+# Leave empty if your Kiro users are not in IAM Identity Center.
+identity_store_id = "d-1234567890"
+
+# Region of the IAM Identity Center instance, if it is not aws_region
+identity_store_region = ""
+
+# Existing IAM user that runs the dashboard. Leave empty if you run it with a role
+# or an IAM Identity Center permission set, and attach the policy from the
+# dashboard_access_policy_arn output to it instead.
+local_iam_user_name = ""
+
+# Optional settings (defaults shown)
+# project_name          = "kiro-user-report-dashboard"
+# glue_database_name    = "kiro_user_report"
+# glue_crawler_schedule = "cron(0 3 * * ? *)"
+# tags = {
+#   Project   = "Kiro Usage Dashboard"
+#   ManagedBy = "Terraform"
+# }

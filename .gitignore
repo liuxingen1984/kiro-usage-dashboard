@@ -1,0 +1,32 @@
+# Local configuration and state: never commit these
+.env
+app/.env
+*.env.local
+*.tfvars
+*.tfvars.json
+*.tfstate
+*.tfstate.*
+.terraform/
+tfplan
+*.tfplan
+crash.log
+crash.*.log
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Generated data: sample reports, downloaded exports, local backups
+sample_data/
+kiro_report_*.html
+kiro_data_*.xlsx
+kiro_data_*.csv
+backups/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

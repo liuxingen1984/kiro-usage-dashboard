@@ -1,0 +1,242 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "S3AthenaResultsBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:CreateBucket",
+        "s3:DeleteBucket",
+        "s3:GetBucketLocation",
+        "s3:GetBucketAcl",
+        "s3:GetBucketVersioning",
+        "s3:PutBucketVersioning",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:DeleteBucketPolicy",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:GetEncryptionConfiguration",
+        "s3:PutEncryptionConfiguration",
+        "s3:GetLifecycleConfiguration",
+        "s3:PutLifecycleConfiguration",
+        "s3:GetBucketTagging",
+        "s3:PutBucketTagging",
+        "s3:GetBucketCORS",
+        "s3:GetBucketLogging",
+        "s3:GetBucketWebsite",
+        "s3:GetBucketRequestPayment",
+        "s3:GetBucketOwnershipControls",
+        "s3:GetReplicationConfiguration",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketNotification",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject",
+        "s3:ListBucketVersions",
+        "s3:DeleteObjectVersion"
+      ],
+      "Resource": [
+        "arn:aws:s3:::kiro-user-report-dashboard-athena-results-<ACCOUNT_ID>",
+        "arn:aws:s3:::kiro-user-report-dashboard-athena-results-<ACCOUNT_ID>/*"
+      ]
+    },
+    {
+      "Sid": "S3DataBucketRead",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<REPORT_BUCKET>",
+        "arn:aws:s3:::<REPORT_BUCKET>/*"
+      ]
+    },
+    {
+      "Sid": "GlueCatalogReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetCatalogImportStatus"
+      ],
+      "Resource": [
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:catalog"
+      ]
+    },
+    {
+      "Sid": "GlueDatabase",
+      "Effect": "Allow",
+      "Action": [
+        "glue:CreateDatabase",
+        "glue:GetDatabase",
+        "glue:GetDatabases",
+        "glue:UpdateDatabase",
+        "glue:DeleteDatabase",
+        "glue:GetTable",
+        "glue:GetTables",
+        "glue:GetPartition",
+        "glue:GetPartitions"
+      ],
+      "Resource": [
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:catalog",
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:database/kiro_user_report",
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:table/kiro_user_report/*"
+      ]
+    },
+    {
+      "Sid": "GlueCrawler",
+      "Effect": "Allow",
+      "Action": [
+        "glue:CreateCrawler",
+        "glue:GetCrawler",
+        "glue:GetCrawlers",
+        "glue:UpdateCrawler",
+        "glue:DeleteCrawler",
+        "glue:StartCrawler",
+        "glue:StopCrawler"
+      ],
+      "Resource": [
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:crawler/kiro-user-report-dashboard-crawler"
+      ]
+    },
+    {
+      "Sid": "GlueTags",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetTags",
+        "glue:TagResource",
+        "glue:UntagResource"
+      ],
+      "Resource": [
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:database/kiro_user_report",
+        "arn:aws:glue:<REGION>:<ACCOUNT_ID>:crawler/kiro-user-report-dashboard-crawler"
+      ]
+    },
+    {
+      "Sid": "AthenaWorkgroup",
+      "Effect": "Allow",
+      "Action": [
+        "athena:CreateWorkGroup",
+        "athena:GetWorkGroup",
+        "athena:UpdateWorkGroup",
+        "athena:DeleteWorkGroup",
+        "athena:ListWorkGroups",
+        "athena:ListTagsForResource",
+        "athena:TagResource",
+        "athena:UntagResource",
+        "athena:StartQueryExecution",
+        "athena:GetQueryExecution",
+        "athena:GetQueryResults",
+        "athena:StopQueryExecution"
+      ],
+      "Resource": [
+        "arn:aws:athena:<REGION>:<ACCOUNT_ID>:workgroup/kiro-user-report-dashboard-workgroup"
+      ]
+    },
+    {
+      "Sid": "IAMRoleManage",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateRole",
+        "iam:GetRole",
+        "iam:DeleteRole",
+        "iam:UpdateRole",
+        "iam:UpdateAssumeRolePolicy",
+        "iam:ListRolePolicies",
+        "iam:ListAttachedRolePolicies",
+        "iam:PutRolePolicy",
+        "iam:GetRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:TagRole",
+        "iam:UntagRole",
+        "iam:ListInstanceProfilesForRole",
+        "iam:ListRoleTags"
+      ],
+      "Resource": [
+        "arn:aws:iam::<ACCOUNT_ID>:role/kiro-user-report-dashboard-glue-crawler-role"
+      ]
+    },
+    {
+      "Sid": "IAMPolicyManage",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreatePolicy",
+        "iam:GetPolicy",
+        "iam:DeletePolicy",
+        "iam:GetPolicyVersion",
+        "iam:ListPolicyVersions",
+        "iam:CreatePolicyVersion",
+        "iam:DeletePolicyVersion",
+        "iam:TagPolicy",
+        "iam:UntagPolicy",
+        "iam:ListPolicyTags"
+      ],
+      "Resource": [
+        "arn:aws:iam::<ACCOUNT_ID>:policy/kiro-user-report-dashboard-athena-access"
+      ]
+    },
+    {
+      "Sid": "IAMPassRoleToGlue",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::<ACCOUNT_ID>:role/kiro-user-report-dashboard-glue-crawler-role",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "glue.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "IAMAttachAWSManagedGlueServiceRoleOnly",
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy"
+      ],
+      "Resource": "arn:aws:iam::<ACCOUNT_ID>:role/kiro-user-report-dashboard-glue-crawler-role",
+      "Condition": {
+        "ArnEquals": {
+          "iam:PolicyARN": [
+            "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "IAMDashboardUserRead",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetUser",
+        "iam:ListAttachedUserPolicies"
+      ],
+      "Resource": "arn:aws:iam::<ACCOUNT_ID>:user/<DASHBOARD_IAM_USER>"
+    },
+    {
+      "Sid": "IAMUserPolicyAttachScoped",
+      "Effect": "Allow",
+      "Action": [
+        "iam:AttachUserPolicy",
+        "iam:DetachUserPolicy"
+      ],
+      "Resource": "arn:aws:iam::<ACCOUNT_ID>:user/<DASHBOARD_IAM_USER>",
+      "Condition": {
+        "ArnEquals": {
+          "iam:PolicyARN": "arn:aws:iam::<ACCOUNT_ID>:policy/kiro-user-report-dashboard-athena-access"
+        }
+      }
+    },
+    {
+      "Sid": "IdentityStoreReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "identitystore:DescribeUser"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
